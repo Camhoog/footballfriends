@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  footballfriends-api:
+    container_name: footballfriends
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=${NODE_ENV}
+        - PORT=${PORT}
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - PORT=${PORT}
+      - NODE_ENV=${NODE_ENV}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - DYNAMODB_REGION=${DYNAMODB_REGION}
+      - DYNAMODB_ENDPOINT=${DYNAMODB_ENDPOINT}
